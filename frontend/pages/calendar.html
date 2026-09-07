@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - QuestBit</title>
+
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="icon" href="../assets/app-icon.svg" type="image/x-icon">
+</head>
+
+<body>
+
+    <div id="popup-container" class="popup-container" style="display: none;">
+        <div class="popup-content">
+
+            <div class="popup-container-header">
+                <h2 class="popup-content-title">Editar Evento</h2>
+                <button type="button" id="close-button" class="close-btn">x</button>
+            </div>
+            
+            <form id="event-edit-form" method="PUT" action="http://localhost:3000/event/:id">
+                <label for="event-title-input">Nome do Evento</label>
+                <input type="text" id="event-title-input" name="event-title" class="task-event-form-input"
+                    placeholder="Ex: Ir ao médico">
+
+                <label for="date">Data</label>
+                <input type="date" name="event-date" id="event-date" class="task-event-form-input">
+
+                <div class="task-event-time-div">
+                    <div class="hour-container">
+                        <label for="event-initial-time-input">Horário Inicial</label>
+                        <input type="time" id="event-initial-time-input" name="event-initial-time"
+                            class="task-event-form-input">
+                    </div>
+
+                    <div class="hour-container">
+                        <label for="event-end-time-input">Horário Final</label>
+                        <input type="time" id="event-end-time-input" name="event-end-time" class="task-event-form-input">
+                    </div>
+
+                </div>
+
+                    <label for="event-desc-input">Descrição</label>
+                    <textarea type="text" id="event-desc-input" name="event-desc" class="task-event-form-input"
+                        placeholder="Endereço: Rua João Ninguém, 243 - Bahamas. Consulta com o Médico João Alguém.">
+                    </textarea>
+                
+                <div class="popup-actions"> 
+                    <button type="button" id="delete-button" class="popup-btn delete-btn">Excluir</button>
+                    <button type="button" id="save-button" class="popup-btn save-btn">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Header nome + dia + foto -->
+    <div id="calendar-header">
+        <div id="calendar_container">
+            <div id="calendar_container_page-name">
+                <p id="calendar-page-name">Calendário</p>
+            </div>
+
+            <div id="calendar_add-new-event">
+                <a id="new-event-anchor" href="./forms/event-form.html">
+                    <img src="../assets/calendar-assets/add-event.svg" alt="">
+
+                    <p id="add-event-text">Adicione um evento</p>
+                </a>
+            </div>
+        </div>
+
+        <div id="h_photo-circle">
+            <div id="h-circle">
+                <img id="h-photo" src="../assets/nav-menu-assets/purple-calendar.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <!-- Container de Eventos -->
+    <p class="global-standard-text" style="text-align: center; margin-top: 24px;">Se liga nos seus eventos: </p>
+
+    <div id="event-container" class="event-container">
+
+        <!-- <div class="event-container__event"> 
+            <div class="event-container__event__column">
+                <div class="event-container__event__title-date-desc">
+                    <p class="title-date-desc__title-date">Segunda - 12/03</p>
+                    <p class="title-date-desc__desc">Ir ao médico (Unimed)</p>
+                </div>
+
+                <div class="event-container__event__hour">
+                    <span class="event-container__event__hour__hour">13:30</span>
+                </div>
+            </div>
+
+            <span class="div-row"></span>
+        </div> -->
+
+    </div>
+
+    <div class="c_show-days">
+        <p class="global-standard-text" style="text-align: center;">Organize a sua rotina: </p>
+
+        <ul id="calendar-day-list" class="task-list">
+
+            <li class="task-card">
+                <a class="anchor-calendar-weekdays" href="./weekdays/monday.html">
+                    <!-- <img class="task-card__task-icon" src="../assets/home-assets/brain.svg" alt=""> (podemos exibir uma cor para indicar o quanto a rotina está ou não pesada) -->
+                    <span class="task-card__task-name"> Segunda </span>
+                    <!-- <span class="task-card__task-time"> 11 </span> (aqui poderíamos exibir o número de tarefas do dia) -->
+                </a>
+            </li>
+
+            <li class="task-card">
+                <a class="anchor-calendar-weekdays" href="./weekdays/tuesday.html">
+                    <span class="task-card__task-name"> Terça </span>
+                </a>
+            </li>
+
+            <li class="task-card">
+                <a class="anchor-calendar-weekdays" href="./weekdays/wednesday.html">
+                    <span class="task-card__task-name"> Quarta </span>
+                </a>
+            </li>
+
+            <li class="task-card">
+                <a class="anchor-calendar-weekdays" href="./weekdays/thursday.html">
+                    <span class="task-card__task-name"> Quinta </span>
+                </a>
+            </li>
+
+            <li class="task-card">
+                <a class="anchor-calendar-weekdays" href="./weekdays/friday.html">
+                    <span class="task-card__task-name"> Sexta </span>
+                </a>
+            </li>
+
+            <li class="task-card">
+                <a class="anchor-calendar-weekdays" href="./weekdays/saturday.html">
+                    <span class="task-card__task-name"> Sábado </span>
+                </a>
+            </li>
+
+            <li class="task-card">
+                <a class="anchor-calendar-weekdays" href="./weekdays/sunday.html">
+                    <span class="task-card__task-name"> Domingo </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <nav class="menu-bar">
+        <div class="container-menu-bar">
+            <div class="container-menu-item">
+                <a href="./home.html">
+                    <img src="../assets/nav-menu-assets/white-home.svg" alt="">
+                </a>
+            </div>
+
+            <div id="container-menu-calendar-item" class="container-menu-item">
+                <a href="./calendar.html">
+                    <img src="../assets/nav-menu-assets/purple-calendar.svg" alt="">
+                </a>
+            </div>
+
+            <div class="container-menu-item">
+
+                <a href="./person.html">
+                    <img src="../assets/nav-menu-assets/white-data.svg" alt="">
+                </a>
+
+            </div>
+
+            <div class="container-menu-item">
+                <a href="./settings.html">
+                    <img src="../assets/nav-menu-assets/white-settings.svg" alt="">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <script src="../js/requisition/checkLogin.js"></script>
+    <script src="../js/requisition/loadEvents.js"></script>
+    <script src="../js/interaction/eventPopup.js"></script>
+</body>
+
+</html>
